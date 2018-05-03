@@ -1,2 +1,2 @@
 # coding_practice
-General coding practice
+All of my coding solutions to random coding problems.
