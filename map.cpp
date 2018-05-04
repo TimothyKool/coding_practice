@@ -1,5 +1,5 @@
 #include <iostream>
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -17,7 +17,7 @@ int main() {
     list.push_back(10);
     list.push_back(50);
     
-    unordered_map<int, int> m;
+    map<int, int> m;
 
     for(unsigned i = 0; i < list.size(); i++) {
         if(m.find(list.at(i)) != m.end()) {
