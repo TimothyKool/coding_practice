@@ -4,56 +4,38 @@
 
 using namespace std;
 
-void fill(map<char, int>& m, const string& word, const int& size) {
-    for(int i = 0; i < size; i++) {
-        if(m.find(word.at(i)) != m.end()) {
-            m[word.at(i)] += 1;
-        }
-        else {
-            m.insert(pair<char, int>(word.at(i), 1));
+bool isPermutation(const string& string1, const string& string2) {
+    int string1Chars [128] = {0};
+
+    if(string1.size() != string2.size()) {
+        return false;
+    }
+    // Update char counts for string1
+    for(unsigned i = 0; i < string1.size(); i++) {
+        string1Chars[string1.at(i)] += 1;
+    }
+    // Check to see if same chars are used
+    for(unsigned i = 0; i < string2.size(); i++) {
+        string1Chars[string2.at(i)] -= 1;
+        if(string1Chars[string2.at(i)] < 0) {
+            return false;
         }
     }
-    return;
+    return true;
 }
 
-
 int main() {
-    map <char, int> m1;
-    map <char, int> m2;
-    bool permutation = true;
+    string string1;
+    string string2;
 
-    string word1 = "hello";
-    string word2 = "olelh";
-    int size1 = word1.size();
-    int size2 = word2.size();
+    cin >> string1 >> string2;
 
-    if(size1 != size2) {
-        permutation = false;
+    if(isPermutation(string1, string2)) {
+        cout << "Yes they are permutations!" << endl;
     }
     else {
-        fill(m1, word1, size1);
-        fill(m2, word2, size2);
+        cout << "No they are not permutations!" << endl;
     }
-
-    cout << m1['h'] << endl;
-    for(auto entry: m1) {
-        cout << entry.first << " " << entry.second << endl;
-    }
-    cout << "-------------------------" << endl;
-    for(auto entry: m2) {
-        cout << entry.first << " " << entry.second << endl;
-    }
-
-    if(m1 != m2) {
-        permutation = false;
-    }
-    if(permutation) {
-        cout << "Is a permutation" << endl;
-    }
-    else {
-        cout << "Is not permutation" << endl;
-    }
-
 
     return 0;
 }
