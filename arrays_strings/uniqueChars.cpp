@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+bool isUnique(const string&);
 
 
 int main() {
@@ -18,29 +19,32 @@ int main() {
     //     }
     // }
     
-    // cout << unique << endl;
-    
-    // O (N) complexity but will always be less than 128 times so could be argued for O(1)
-    bool arr [128] = {0};
-    string word = "Helo thr";
-    bool unique = true;
-    int charValue;
-    
-    if(word.size() > 128) {
-        unique = false;
+    string input;
+    getline(cin, input);
+
+    if(isUnique(input)) {
+        cout << "\"" << input << "\"" << " is unique!" << endl;
     }
-    
-    for(unsigned i = 0; i < word.size(); i++) {
-        charValue = word.at(i);
-        if(arr[charValue]) {
-            unique = false;
-        }
-        arr[charValue] = true;
+    else {
+        cout << "\"" << input << "\"" << " is not unique!" << endl;
     }
-    cout << unique << endl;
-    
-    
-    
     
     return 0;
+}
+
+// At first look, seems like O(N) (where N is the number of chars in input); however, will always be less than 128 times so actually O(1)
+bool isUnique(const string& input) {
+    bool uniqueChars [128] = {0};
+    if(input.size() > 128) {
+        return false;
+    }
+    for(unsigned i = 0; i < input.size(); i++) {
+        if(uniqueChars[input.at(i)]) {
+            return false;
+        }
+        else {
+            uniqueChars[input.at(i)] = 1;
+        }
+    }
+    return true;
 }
